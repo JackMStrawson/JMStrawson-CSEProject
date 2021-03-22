@@ -206,6 +206,9 @@ class OneDimReservoir():
             self.newBinv = self.delta_t  * self.Binv
             self.p = self.p +  (self.newBinv).dot(self.product)
         
+        elif self.inputs['numerical']['solver'] == 'steady-state':
+            self.p = scipy.sparse.linalg.spsolve(self.T, self.Q)
+        
         elif 'mixed method' in self.inputs['numerical']['solver']:
             theta = self.inputs['numerical']['solver']['mixed method']['theta']
             self.p = scipy.sparse.linalg.spsolve(( (1- theta) * self.T + 1 / self.delta_t * self.B), ((1 / self.delta_t * self.B - theta * self.T).dot(self.p) +  self.Q))
