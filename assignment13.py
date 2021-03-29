@@ -64,6 +64,7 @@ class OneDimReservoir():
         
         if isinstance(self.inputs['reservoir']['permeability'], list) == True:
             self.k = self.inputs['reservoir']['permeability']
+            
         else:
             self.k = np.ones(self.Nx) * self.inputs['reservoir']['permeability']
         
